@@ -1,0 +1,287 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+  <header>
+    <div class="container">
+      <div class="promo">
+        <div class="promo__content">
+          <h1 class="promo__title">Производство и монтаж гипсовой лепнины в ДНР</h1>
+          <p class="promo__description">
+            <span class="promo__brand">Форма жизни</span> – это качественные материалы, команда профессионалов и индивидуальный подход для каждого клиента
+          </p>
+          <div class="promo__categories">
+            {% for category in categories|slice:':3' %}
+              <div class="category">
+                <a href="#" class="category__link">
+                  <div class="category__tag">
+                    <img src="{{ category.image.url }}" alt="Интерьер" class="category__image" />
+                    <h3 class="category__name">{{ category.name }}</h3>
+                  </div>
+                  <span class="category__count">{{ category.works.count }}+ работ</span>
+                  <img src="{% static 'img/arrow.svg' %}" alt="" />
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class="promo__actions">
+            <button class="promo__button">Посмотреть работы <img src="{% static 'img/arrow.svg' %}" alt="" /></button>
+            <button class="promo__button secondary">Обсудить проект</button>
+          </div>
+        </div>
+        <div class="promo__image">
+          <img src="{% static 'img/main.png' %}" alt="Main Image" />
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="interior">
+    <div class="container">
+      <div class="section__heading">
+        <h2 class="interior__title">Лучшие решения для вашего интерьера</h2>
+        <p class="interior__subtitle">
+          Наша команда специалистов уже <strong>более 15ти лет</strong>, заботится о комфорте и здоровье наших клиентов, создавая уникальные проекты
+        </p>
+      </div>
+      <div class="interior__grid">
+        <div class="interior__item img">
+          <img src="{% static 'img/interior.png' %}" alt="Проекты любой сложности" class="interior__image" />
+        </div>
+        <div class="interior__item">
+          <div class="interior__text">
+            <h3 class="interior__item-title">Проекты любой сложности</h3>
+            <p class="interior__item-description">Независимо от масштаба и сложности, мы воплотим ваши мечты в реальность</p>
+          </div>
+        </div>
+        <div class="interior__item img">
+          <img src="{% static 'img/interior2.png' %}" alt="Проекты любой сложности" class="interior__image" />
+        </div>
+        <div class="interior__item dark">
+          <div class="interior__text">
+            <h3 class="interior__item-title">Качественные материалы</h3>
+            <p class="interior__item-description">Экологичны, не горючи, долговечны и устойчивы к температурным перепадам</p>
+          </div>
+        </div>
+
+        <div class="interior__item green">
+          <div class="interior__text">
+            <h3 class="interior__item-title">Полный спектр услуг</h3>
+            <p class="interior__item-description">От консультации и проектирования до изготовления и монтажа</p>
+          </div>
+        </div>
+        <div class="interior__item img">
+          <img src="{% static 'img/interior3.png' %}" alt="Проекты любой сложности" class="interior__image" />
+        </div>
+        <div class="interior__item">
+          <div class="interior__text">
+            <h3 class="interior__item-title">Отличные цены</h3>
+            <p class="interior__item-description">Цена ниже, чем у полиуретановых аналогов. Также мы предлагаем гибкую систему скидок</p>
+          </div>
+        </div>
+        <div class="interior__item img">
+          <img src="{% static 'img/interior4.png' %}" alt="Проекты любой сложности" class="interior__image" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="works">
+    <div class="container">
+      <div class="works__container">
+        <div class="section__heading">
+          <h2 class="works__title">Работы студии</h2>
+          <p class="works__subtitle active">
+            С нами даже <strong>самые смелые и сложные проекты</strong> становятся реальностью
+          </p>
+          <ul class="works__breadcrumbs">
+            <li id="worksBase">Работы студии</li>
+            <li id="worksCategories">
+              {% for category in categories %}
+                <span data-category="{{ category.id }}">{{ category.name }}</span>
+              {% endfor %}
+            </li>
+            <li id="worksItems">
+              {% for work in works %}
+                <span data-work="{{ work.id }}">{{ work.title }}</span>
+              {% endfor %}
+            </li>
+          </ul>
+        </div>
+        <div class="category__grid active">
+          {% for category in categories %}
+            <div class="category__item" data-selfId="{{ category.id }}">
+              <img src="{{ category.image.url }}" alt="Интерьер" class="category__image" />
+              <div class="category__overlay">
+                <span class="category__label">{{ category.name }}</span>
+                <span class="category__arrow">→</span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="works__modal">
+          <div class="works__slider swiper">
+            <div class="swiper-wrapper">
+              {% for work in works %}
+                <div class="work__item swiper-slide" data-category="{{ work.category_id }}" data-selfid="{{ work.id }}">
+                  <img class="work__img" src="{{ work.image.url }}" alt="" />
+                  <div class="work__overlay">
+                    <h3 class="work__title">{{ work.title }}</h3>
+                    <p class="work__desc">{{ work.location }} {{ work.date_of_creation }}</p>
+                    <button class="works__detail_btn">Подробнее</button>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="works__detail">
+          <div class="works__detail_close">&times</div>
+          {% for work in works %}
+            <div class="works__detail__item" data-work="{{ work.id }}">
+              <div class="works__detail__img">
+                <img src="{{ work.image.url }}" alt="" />
+              </div>
+              <div class="works__detail__text">
+                <h2 class="works__detail__title">{{ work.title }}</h2>
+                <div class="works__detail__string">
+                  <div>
+                    <p>
+                      <strong>Материалы:</strong>
+                    </p>
+                    <ul>
+                      {% for material in work.materials.splitlines %}
+                        <li>{{ material }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <div>
+                    <p>
+                      <strong>Для оформления:</strong>
+                    </p>
+                    <ul>
+                      {% for item in work.for_decoration.splitlines %}
+                        <li>{{ item }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+                <div class="works__detail__string">
+                  <p>
+                    <strong>Преимущества:</strong>
+                  </p>
+                  <ul>
+                    {% for advantage in work.advantages.splitlines %}
+                      <li>{{ advantage }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+                <div>
+                  <p>
+                    <strong>Уход и эксплуатация:</strong>
+                  </p>
+                  <p>{{ work.care_and_use }}</p>
+                </div>
+                <div class="works__detail__buttons">
+                  <button class="works__detail_button">Узнать стоимость</button>
+                  <button class="works__detail_button">Заказать проект</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="faq">
+    <img class="faq__pl" src="{% static 'img/faq_pl.png' %}" alt="" />
+    <div class="container">
+      <div class="section__heading">
+        <h2 class="faq__title">Вопрос - ответ</h2>
+        <p class="faq__description">
+          Не нашли ответ на интересующий вопрос вас? Пожалуйста, свяжитесь с нами и мы с радостью проведем
+          <strong>бесплатную консультацию</strong>
+        </p>
+      </div>
+      <div class="faq__list">
+        {% for faq in faqs %}
+          <div class="faq__item">
+            <div class="faq__head">
+              <span class="faq__question">{{ faq.question }}</span>
+              <span class="faq__icon">+</span>
+            </div>
+            <div class="faq__answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="faq__image"></div>
+  </section>
+  <section class="video-review">
+    <div class="container">
+      <div class="section__heading">
+        <h2 class="video-review__title">Видео - обзор</h2>
+        <p class="video-review__description">
+          Ваши идеи и наши возможности – идеальное сочетание для создания интерьера мечты. <strong>Приятного просмотра!</strong>
+        </p>
+      </div>
+      <div class="video-review__video">
+        <div style="min-width: 100%">
+          <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+            <iframe src="https://frontend.vh.yandex.ru/player/?from=partner" allow="autoplay; encrypted-media; screen-wake-lock" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="video-review__actions">
+        <a href="#" class="video-review__button video-review__button--primary">Посмотреть работы</a>
+        <a href="#" class="video-review__button video-review__button--secondary">Записаться на консультацию</a>
+      </div>
+    </div>
+  </section>
+  <section class="contacts">
+    <div class="container">
+      <div class="contacts__block">
+        <div class="contacts__info">
+          <h2 class="contacts__title">Контакты</h2>
+          <p class="contacts__description">Свяжитесь с нами по номеру телефона или напишите нам на почту в любое время, и мы отправим вам ответ</p>
+          <div class="contacts__details">
+            <div class="contacts__item">
+              <span class="contacts__label">Телефон</span>
+              <p class="contacts__value">{{ contact_info.phone1 }} &nbsp;&nbsp; {{ contact_info.phone2 }}</p>
+            </div>
+            <div class="contacts__item">
+              <span class="contacts__label">Email</span>
+              <p class="contacts__value">{{ contact_info.email }}</p>
+            </div>
+            <div class="contacts__item">
+              <span class="contacts__label">График работы</span>
+              <p class="contacts__value">{{ contact_info.working_hours }}</p>
+            </div>
+            <div class="contacts__item">
+              <span class="contacts__label">Адрес</span>
+              <p class="contacts__value">{{ contact_info.address }}</p>
+            </div>
+          </div>
+          <div class="contacts__map">
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A8c4fdcee8d6e55647f06ca5b3cde3167309c8af18af8decf0af41f525659b7b3&amp;width=460&amp;height=230&amp;lang=ru_RU&amp;scroll=true"></script>
+          </div>
+        </div>
+        <div class="contacts__form">
+          <h3 class="contacts__form-title">Заполните форму для бесплатной консультации</h3>
+          <form method="post" class="contacts__form-content" id="lead_form">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Имя" class="contacts__form-input" value="{{ form.name.value|default_if_none:'' }}" required />
+            <input type="tel" name="phone" placeholder="Ваш номер телефона" class="contacts__form-input" value="{{ form.phone.value|default_if_none:'' }}" required />
+            <input type="text" name="message" placeholder="Удобное время и дата" class="contacts__form-input" value="{{ form.message.value|default_if_none:'' }}" required />
+            <button type="submit" class="contacts__form-button">Записаться на консультацию</button>
+            <label class="contacts__form-checkbox"><input type="checkbox" name="agreement" required />Даю согласие на обработку персональных данных</label>
+          </form>
+          <script>
+            const leadFormEndpoint = "{% url 'lead_form' %}"
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+<nav>
+  <div class="container">
+    <div class="navbar">
+      <div class="navbar__logo">
+        <img src="{% static 'img/logo.svg' %}" alt="Форма жизни" />
+      </div>
+      <ul class="navbar__links nav-links">
+        <li class="nav-links__item">
+          <a href="#about" class="nav-links__link">О студии</a>
+        </li>
+        <li class="nav-links__item">
+          <a href="#projects" class="nav-links__link">Наши работы</a>
+        </li>
+        <li class="nav-links__item">
+          <a href="#faq" class="nav-links__link">Вопросы</a>
+        </li>
+        <li class="nav-links__item">
+          <a href="#contacts" class="nav-links__link">Контакты</a>
+        </li>
+      </ul>
+      <button class="navbar__toggler"><img src="{% static 'img/icon.svg' %}" alt="" /></button>
+    </div>
+  </div>
+</nav>

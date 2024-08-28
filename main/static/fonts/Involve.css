@@ -1,0 +1,49 @@
+/* Подключение шрифтов семейства Involve */
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-BoldOblique.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-SemiBoldOblique.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('Involve/Involve-Oblique.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
